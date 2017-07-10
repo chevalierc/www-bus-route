@@ -6,9 +6,9 @@ module.exports = {
 
     database: {
         host: "us-cdbr-iron-east-03.cleardb.net",
-        user: "b386642be81341",
-        password: '79f62f3e',
-        database: "heroku_2619f3a36644089",
+        user: "bb6bc7b13083e4",
+        password: '6ab5298b',
+        database: "heroku_1588b8642669eca",
         connectionLimit: 20,
     },
 
