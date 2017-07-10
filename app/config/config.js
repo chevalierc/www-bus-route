@@ -1,5 +1,5 @@
 module.exports = {
-    port: 80, //'port': process.env.PORT || 8080,
+    port: process.env.PORT || 8080, //'port': process.env.PORT || 8080,
 
     //Whether the sqlhelper module logs every command it runs. helpful for debugging
     logSQL: true,
