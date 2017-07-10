@@ -2,7 +2,7 @@
   "name": "heroku-node",
   "main": "server.js",
   "scripts": {
-    "start": "forever server.js"
+    "start": "node server.js"
   },
   "dependencies": {
     "bcrypt-nodejs": "0.0.3",
