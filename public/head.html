@@ -1,5 +1,7 @@
 <html>
 <head>
+  <meta name="google-signin-client_id" content="25035479121-c25jn4mdujb6jrb2h726m7m8c8i7cih3.apps.googleusercontent.com">
+  <script src="https://apis.google.com/js/platform.js" async defer></script>
   <!-- Latest compiled and minified CSS -->
 <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 
@@ -55,7 +57,7 @@
       gapi.load('auth2', function(){
         // Retrieve the singleton for the GoogleAuth library and set up the client.
         auth2 = gapi.auth2.init({
-          client_id: 'YOUR_CLIENT_ID.apps.googleusercontent.com',
+          client_id: '25035479121-c25jn4mdujb6jrb2h726m7m8c8i7cih3.apps.googleusercontent.com',
           cookiepolicy: 'single_host_origin',
           // Request scopes in addition to 'profile' and 'email'
           //scope: 'additional_scope'
@@ -98,9 +100,9 @@
 
     <div id="customBtn" class="customGPlusSignIn">
       <span class="icon"></span>
-      <span class="buttonText">Sign In</span>
+      <span class="buttonText" id="name">Sign In</span>
     </div>
-  </div><script>startApp();</script>
+  </div>
 </li>
 </ul>
 
@@ -109,7 +111,7 @@
 
 
 </div>
-
+<script>startApp();</script>
 </body>
 
 
