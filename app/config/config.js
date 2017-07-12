@@ -15,14 +15,12 @@ module.exports = {
     secret: 'SwiftySecret', //For Token encryption
 
     publicRoutes: [
-        'routes/route.createUser'
+        'routes/route.createUser',
+        'routes/route.commute'
     ],
 
     privateRoutes: [
         'routes/route.user'
-    ],
+    ]
 
-    dbColumns: {
-        users: [ 'nickname', 'email', 'id', 'password' ],
-    }
 };
