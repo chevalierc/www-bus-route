@@ -20,6 +20,7 @@
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
 
+    
     <script>
         var googleUser = {};
         var startApp = function () {
@@ -91,15 +92,10 @@
             <div class="form-group">
                 <label for="endAddress">End Address</label>
                 <input type="text" class="form-control" id="endAddress" placeholder="End Address">
-            </div>
-            <iframe
-                    width="300"
-                    height="225"
-                    frameborder="0" style="border:0"
-                    src="https://www.google.com/maps/embed/v1/place?key=AIzaSyCsriJq3oyx8TiCnR9JsmzakHw8n791vic&q=Space+Needle,Seattle+WA"
-                    allowfullscreen>
-            </iframe>
-        </div>
+            </div> 
+		<div style="width:400px; height:200px;" id="Amap"></div>
+          </div>
+	
         <div class="col-md-6">
             <div class="form-group row">
                 <label for="startTime" class="col-2 col-form-label">Start Time</label>
@@ -153,6 +149,52 @@
         </p>
     </div>
 </footer>
+
+<script> 
+	function initMap(){
+		var directionService = new google.maps.DirectionsService; 
+		var directionDisplay = new google.maps.DirectionsRenderer;
+
+	var map = new google.maps.Map(document.getElementById('Amap'), {
+		zoom: 7, 
+		center: {lat: 41.85, lng: -87.65}
+	}); 
+
+	directionDisplay.setMap(map);
+	var onChangeHandler = function(){
+		if(!(document.getElementById('startAddress').value === '' || document.getElementById('endAddress').value === '')){
+
+			calculateAndDisplayRoute(directionService, directionDisplay); 
+		}
+	}
+	document.getElementById('startAddress').addEventListener('blur', onChangeHandler); 
+	document.getElementById('endAddress').addEventListener('blur', onChangeHandler); 
+
+	function calculateAndDisplayRoute(directionsService, directionDisplay) {
+        	directionsService.route({
+          		origin: document.getElementById('startAddress').value,
+          		destination: document.getElementById('endAddress').value,
+          		travelMode: 'DRIVING'
+        	}, function(response, status) {
+         		 if (status === 'OK') {
+            			directionDisplay.setDirections(response);
+          		} else {
+            			window.alert('Directions request failed due to ' + status);
+          		}
+        	
+		});
+		
+      	  }
+	}
+	
+
+ 
+    
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap">
+    </script>
 
 </body>
 </html>
