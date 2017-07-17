@@ -1,6 +1,7 @@
 var bcrypt = require( 'bcrypt-nodejs' );
 var sqlHelper = require( '../helpers/sqlHelper' )
-var moment = require( 'moment' )
+var config = require( '../config/config' );
+var jwt = require( 'jsonwebtoken' );
 
 module.exports = function( app, express ) {
     var apiRouter = express.Router();
@@ -27,8 +28,18 @@ module.exports = function( app, express ) {
                     }
 
                 } else {
+                    var token = jwt.sign( {
+                        id: rows.insertId,
+                        email: contents.email
+                    }, config.secret, {
+                        expiresInMinutes: 30 * 24 * 60
+                    } );
+
+                    // return the information including token as JSON
                     return res.json( {
-                        success: true
+                        success: true,
+                        message: 'Enjoy your token!',
+                        token: token
                     } );
                 }
             } );

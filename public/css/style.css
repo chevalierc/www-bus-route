@@ -22,6 +22,16 @@ body {
 
 }
 
+#banner{
+    background-image: url("../img/inbus.jpg");
+    background-size: cover;
+}
+
+.white-black-shadow{
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 #customBtn {
     display: inline-block;
     background: white;
@@ -60,5 +70,3 @@ span.buttonText {
     /* Use the Roboto font that is loaded in the <head> */
     font-family: 'Roboto', sans-serif;
 }
-
-

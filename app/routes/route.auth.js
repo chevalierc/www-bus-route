@@ -36,11 +36,9 @@ module.exports = function( app, express ) {
                     // create a token
                     var token = jwt.sign( {
                         id: user.id,
-                        name: user.name,
-                        role: user.role,
                         email: user.email
                     }, superSecret, {
-                        expiresInMinutes: 24 * 60
+                        expiresInMinutes: 30 * 24 * 60
                     } );
 
                     // return the information including token as JSON
@@ -69,8 +67,6 @@ module.exports = function( app, express ) {
 
         // decode token
         if ( token ) {
-
-            console.log(req.headers[ 'access_token' ])
 
             // verifies secret and checks exp
             jwt.verify( token, superSecret, function( err, decoded ) {
