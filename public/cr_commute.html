@@ -1,0 +1,200 @@
+<html>
+<head>
+    <meta name="google-signin-client_id"
+          content="25035479121-c25jn4mdujb6jrb2h726m7m8c8i7cih3.apps.googleusercontent.com">
+    <script src="https://apis.google.com/js/platform.js" async defer></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jquery 3.x minified -->
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
+    <script src="https://apis.google.com/js/api:client.js"></script>
+
+    
+    <script>
+        var googleUser = {};
+        var startApp = function () {
+            gapi.load('auth2', function () {
+                // Retrieve the singleton for the GoogleAuth library and set up the client.
+                auth2 = gapi.auth2.init({
+                    client_id: '25035479121-c25jn4mdujb6jrb2h726m7m8c8i7cih3.apps.googleusercontent.com',
+                    cookiepolicy: 'single_host_origin'
+                    // Request scopes in addition to 'profile' and 'email'
+                    //scope: 'additional_scope'
+                });
+                attachSignin(document.getElementById('customBtn'));
+            });
+        };
+
+        function attachSignin(element) {
+            console.log(element.id);
+            auth2.attachClickHandler(element, {},
+                function (googleUser) {
+                    document.getElementById('name').innerText = "Signed in: " +
+                        googleUser.getBasicProfile().getName();
+                }, function (error) {
+                    alert(JSON.stringify(error, undefined, 2));
+                });
+        }
+    </script>
+
+</head>
+<body>
+<!-- navigation bar -->
+<div class="container">
+    <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" href="index.html">
+                    <span class="glyphicon glyphicon-home"></span>
+                </a>
+            </div>
+            <ul class="nav navbar-nav">
+                <li class="active"><a href="cr_commute.html">Create Commutes</a></li>
+                <li><a href="#">Commutes</a></li>
+                <li><a href="#">Proposed Changes</a></li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li style="float:left">
+                    <div id="gSignInWrapper">
+
+                        <div id="customBtn" class="customGPlusSignIn">
+                            <span class="icon"></span>
+                            <span class="buttonText" id="name">Sign In</span>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+</div>
+
+<!-- Create Commute Form -->
+
+<div class="container">
+    <form>
+        <div class="col-md-6">
+            <div class="form-group">
+                <label for="startAddress">Start Address</label>
+                <input type="text" class="form-control" id="startAddress" placeholder="Start Address">
+            </div>
+            <div class="form-group">
+                <label for="endAddress">End Address</label>
+                <input type="text" class="form-control" id="endAddress" placeholder="End Address">
+            </div> 
+		<div style="width:400px; height:200px;" id="Amap"></div>
+          </div>
+	
+        <div class="col-md-6">
+            <div class="form-group row">
+                <label for="startTime" class="col-2 col-form-label">Start Time</label>
+                <div class="col-10">
+                    <input class="form-control" type="time" value="13:45:00" id="startTime">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="endTime" class="col-2 col-form-label">End Time</label>
+                <div class="col-10">
+                    <input class="form-control" type="time" value="13:45:00" id="endTime">
+                </div>
+            </div>
+            <!-- Days checkboxs start -->
+            <div class="form-group row">
+                <label> Days of the Week </label>
+                <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox1" value="sunday"> S
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox2" value="monday"> M
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox3" value="tuesday"> T
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox4" value="wednesday"> W
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox5" value="thursday"> Th
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox6" value="friday"> F
+                    </label>
+                    <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="inlineCheckbox7" value="sunday"> S
+                    </label>
+                </div>
+            </div>
+            <!-- Days checkboxs end -->
+        </div>
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+<!-- Sticky footer -->
+<footer class="footer">
+    <div class="container">
+        <p class="text-muted">Created by Andrew Hart, Chris Chevaleir, and Kevin Cotter for credit in a course taught by
+            Jones Yu @ Wentworth Institute of Technology
+        </p>
+    </div>
+</footer>
+
+<script> 
+	function initMap(){
+		var directionService = new google.maps.DirectionsService; 
+		var directionDisplay = new google.maps.DirectionsRenderer;
+
+	var map = new google.maps.Map(document.getElementById('Amap'), {
+		zoom: 7, 
+		center: {lat: 41.85, lng: -87.65}
+	}); 
+
+	directionDisplay.setMap(map);
+	var onChangeHandler = function(){
+		if(!(document.getElementById('startAddress').value === '' || document.getElementById('endAddress').value === '')){
+
+			calculateAndDisplayRoute(directionService, directionDisplay); 
+		}
+	}
+	document.getElementById('startAddress').addEventListener('blur', onChangeHandler); 
+	document.getElementById('endAddress').addEventListener('blur', onChangeHandler); 
+
+	function calculateAndDisplayRoute(directionsService, directionDisplay) {
+        	directionsService.route({
+          		origin: document.getElementById('startAddress').value,
+          		destination: document.getElementById('endAddress').value,
+          		travelMode: 'DRIVING'
+        	}, function(response, status) {
+         		 if (status === 'OK') {
+            			directionDisplay.setDirections(response);
+          		} else {
+            			window.alert('Directions request failed due to ' + status);
+          		}
+        	
+		});
+		
+      	  }
+	}
+	
+
+ 
+    
+
+</script>
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap">
+    </script>
+
+</body>
+</html>
