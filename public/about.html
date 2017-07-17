@@ -1,4 +1,4 @@
-<html >
+<html>
 <head>
     <meta name="google-signin-client_id"
           content="25035479121-c25jn4mdujb6jrb2h726m7m8c8i7cih3.apps.googleusercontent.com">
@@ -19,8 +19,6 @@
 
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet" type="text/css">
     <script src="https://apis.google.com/js/api:client.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
 
     <script>
         var googleUser = {};
@@ -49,10 +47,8 @@
         }
     </script>
 
-
-
 </head>
-<body ng-app="routeList">
+<body>
 <!-- navigation bar -->
 <div class="container">
     <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
@@ -80,16 +76,19 @@
             </ul>
         </div>
     </nav>
-
-
-<!--Content-->
-<div>
-
-
-    <routes-list></routes-list>
-
 </div>
 
+<!-- Introduction Section -->
+<div class="container">
+    <div class="row text-center">
+        <h1> Welcome to Neighborly Bus Routes </h1><br>
+    </div>
+    <div class="row text-justify">
+        <h2>We hope to provide a more direct communication between public transportation authorities and their loyal
+            passengers. We believe it is important for public organizations to have feedback from the people that they
+            serve and that areas that are underserved by public transportation, should certainly have more of a
+            voice. </h2>
+    </div>
 </div>
 
 <!-- Sticky footer -->
@@ -100,89 +99,7 @@
         </p>
     </div>
 </footer>
-<script>
-angular.
-module('routeList', []);
-
-angular.
-module('routeList').
-component('routesList', {
-  template: `
-  <table class="table table-hover">
-    <thead>
-      <tr>
-        <th>Proposed Changes</th>
-
-
-      </tr>
-    </thead>
-    <tbody>
-  <tr ng-repeat="route in $ctrl.routes">
-  <td >
-      <div class="row">
-        <div class="col-md-1">
-         <span ng-style="route.color" ng-click="$ctrl.upVote(route)" style="display: table; margin: auto; font-size: 45px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-         <h2> {{route.upVotes}} </h2>
-</div>
-        <div class="col-md-6">
-          <div class="row" >
-            <h2 style="margin-top:0px">{{route.title}}</h2>
-          </div>
-          <div class="row">
-            <p>{{route.snippet}}</p>
-          </div>
-          <div class="row">
-            <a href="#"> {{route.comments}} Comments</a>
-          </div>
-        </div>
-      </div>
-  </td>
-  </tr>
-  </tbody>
-</tables>`,
-  controller:['$scope', function PhoneListController($scope) {
-    this.routes = [
-      {
-        id:"1",
-        title: 'Bus to Cambridge',
-        snippet: 'this bus will go to Cambridge.',
-        comments: 1,
-        upVotes : 140,
-        color: {}
-      }, {
-        id:"2",
-        title: 'Bus from fort point to Sommerville',
-        snippet: 'This bus will go from Fort Point ot Sommerville through down town boston',
-        comments: 2,
-        upVotes : 34,
-        color: {}
-      }, {
-        id:"2",
-        title: 'Bus to go through quincy to Braintree',
-        snippet: 'this bus will go to Braintree through Quincy.',
-        comments: 3,
-        upVotes : 12,
-        color: {}
-      }
-    ];
-
-  this.upVote = function(route){
-    if(route.color['color'] =='red'){
-      route.color = {'color': 'black'};
-      route.upVotes = route.upVotes - 1;
-    }else{
-      route.color={'color': 'red'};
-      route.upVotes = route.upVotes + 1;
-    }
-  }
-
-  } ]
-});
-
-</script>
-
 <script>startApp();</script>
-
-
 </body>
 </html>
+
