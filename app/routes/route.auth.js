@@ -13,8 +13,11 @@ module.exports = function( app, express ) {
     // route to authenticate a user (POST http://localhost:8080/api/authenticate)
     apiRouter.post( '/authenticate', function( req, res ) {
 
-        sqlHelper.findOne( pool, 'users', {
-            email: req.body.email
+        sqlHelper.findOne( {
+            table:'user',
+            find_object: {
+                email: req.body.email
+            }
         }, function( err, user ) {
             if ( !user ) {
                 res.json( {
@@ -57,10 +60,17 @@ module.exports = function( app, express ) {
         console.log( 'Somebody just came to our app!' );
 
         // check header or url parameters or post parameters for token
-        var token = req.body.token || req.query.token || req.headers[ 'x-access-token' ];
+        var token = req.body.token || req.query.token;
+
+        if( req.headers.cookie && req.headers.cookie.includes("access_token") ){
+            token = req.headers.cookie.split("=")[1]
+            console.log(token)
+        }
 
         // decode token
         if ( token ) {
+
+            console.log(req.headers[ 'access_token' ])
 
             // verifies secret and checks exp
             jwt.verify( token, superSecret, function( err, decoded ) {

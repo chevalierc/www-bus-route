@@ -16,11 +16,11 @@ module.exports = {
 
     publicRoutes: [
         'routes/route.createUser',
-        'routes/route.commute'
     ],
 
     privateRoutes: [
-        'routes/route.user'
+        'routes/route.user',
+        'routes/route.commute'
     ]
 
 };

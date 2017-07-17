@@ -7,9 +7,12 @@ module.exports = function( app, express ) {
 
     apiRouter.route( '/users' )
         .post( function( req, res ) {
-            req.body.athlete_score = workoutCreator.determineAthleteScore( req.body )
-            req.body.password = bcrypt.hashSync( req.body.password )
-            sqlHelper.create( pool, "users", req.body, function( err, rows ) {
+            var contents = req.body
+            contents.password = bcrypt.hashSync(contents.password) //hash the password
+            sqlHelper.create( {
+                table: "user",
+                object: contents,
+            }, function( err, rows ) {
                 if ( err ) {
                     if ( err.errno == 1062 ) {
                         return res.json( {

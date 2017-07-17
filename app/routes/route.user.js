@@ -7,7 +7,10 @@ module.exports = function( app, express ) {
 
     apiRouter.route( '/user' )
         .post( function( req, res ) {
-            sqlHelper.get( pool, "users", req.decoded.id, function( err, rows, cols ) {
+            sqlHelper.get( {
+                table: "user",
+                id: req.decoded.id
+            }, function( err, rows, cols ) {
                 if ( err ) {
                     return res.json( {
                         success: false,
@@ -39,7 +42,10 @@ module.exports = function( app, express ) {
 
     apiRouter.route( '/user' )
         .get( function( req, res ) {
-            sqlHelper.get( pool, "users", req.decoded.id, function( err, rows, cols ) {
+            sqlHelper.get( {
+                table: "user",
+                id: req.decoded.id
+            }, function( err, rows, cols ) {
                 if ( err ) {
                     return res.json( {
                         success: false,
