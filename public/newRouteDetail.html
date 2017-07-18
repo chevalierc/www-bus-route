@@ -1,0 +1,222 @@
+<html>
+<head>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
+          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <!-- jquery 3.x minified -->
+    <script
+            src="https://code.jquery.com/jquery-3.2.1.min.js"
+            integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+
+
+
+
+
+</head>
+
+<body ng-app='routeDetail'>
+  <div class="container">
+      <nav class="navbar navbar-light" style="background-color: #e3f2fd;">
+          <div class="container-fluid">
+              <div class="navbar-header">
+                  <a class="navbar-brand" href="#">
+                      <span class="glyphicon glyphicon-home"></span>
+                  </a>
+              </div>
+              <ul class="nav navbar-nav">
+                  <li class="active"><a href="cr_commute.html">Create Commutes</a></li>
+                  <li><a href="#">Commutes</a></li>
+                  <li><a href="about.html">About</a></li>
+              </ul>
+
+          </div>
+      </nav>
+    </div>
+      <div class="container" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid">
+      <div class="row">
+        <div class="col-md-4">
+          <h3> Route Number: 5 </h3>
+        </div>
+        <div class="col-md-4" >
+          <h3 style="text-align:left">Start Address - End Address  </h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-4">
+          <routes-schedule></routes-schedule>
+        </div>
+        <div class="col-md-4">
+          <div style="width:400px; height:200px;" id="Amap"></div>
+        </div>
+      </div>
+    </div>
+      <div class="container">
+        <route-comments > </route-comments >
+    </div>
+
+
+
+        <script>
+        angular.
+        module('routeDetail', []);
+
+        angular.
+        module('routeDetail').
+        component('routesSchedule', {
+          template: `
+          <table class="table">
+            <thead>
+              <tr >
+                <th ng-repeat="stop in $ctrl.stops">{{stop}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="time in $ctrl.times">
+
+                <td ng-repeat="Atime in time">{{Atime}}</td>
+
+              </tr>
+              <tr>
+
+              </tr>
+
+
+            </tbody>
+          </table>`,
+          controller: ['$scope', function($scope){
+            this.stops = [
+              "Ruggles", "State St.","Newbury St.", "Back Bay"
+            ];
+            this.times = [
+              ["9:00","9:15","9:20","9:25"],
+              ["10:00","10:15","10:20","10:25"],
+              ["11:00","11:15","11:20","11:25"],
+              ["12:00","12:15","12:20","12:25"],
+            ];
+
+          }]
+        })
+
+        angular.
+        module('routeDetail').component('routeComments', {
+          template: `
+          <div class="commentbox" ng-repeat="comment in $ctrl.comments" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
+            <div class="row">
+          <div class="col-md-1">
+          <div class="row" style="margin-bottom: 1px invisible">
+            <div class="col-md-1">
+              <span ng-click="$ctrl.upVote(comment)" ng-style="comment.upColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+
+            </div>
+          </div>
+          <div class="row" style="margin-top: 5px">
+            <div class="col-md-1">
+              <span ng-click="$ctrl.downVote(comment)" ng-style="comment.downColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <p> {{comment.text}}</p>
+        </div>
+        </div>
+      </div> `,
+          controller: ['$scope', function($scope){
+            this.upVote = function(route){
+              if(route.upColor['color'] =='red'){
+                route.upColor = {'color': 'black'};
+
+              }else{
+                route.upColor={'color': 'red'};
+
+              }
+            }
+            this.downVote = function(route){
+              if(route.downColor['color'] =='red'){
+                route.downColor = {'color': 'black'};
+
+              }else{
+                route.downColor={'color': 'red'};
+
+              }
+            }
+
+            this.comments =[
+              {
+                text: "terrible route",
+                upColor: {},
+                downColor :{}
+              },
+              {
+                text: 'The bus was late this morning.',
+                upColor:{},
+                downColor :{}
+              },
+              {
+                text: "This would be a great change",
+                upColor: {},
+                downColor :{}
+              }
+            ]
+
+
+
+          }]
+
+        });
+        </script>
+
+        <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap">
+          </script>
+
+            <script>
+            	function initMap(){
+            		var directionService = new google.maps.DirectionsService;
+            		var directionDisplay = new google.maps.DirectionsRenderer;
+
+            	var map = new google.maps.Map(document.getElementById('Amap'), {
+            		zoom: 7,
+            		center: {lat: 41.85, lng: -87.65}
+            	});
+
+            	directionDisplay.setMap(map);
+            	var onChangeHandler = function(){
+            		if(false){
+
+            			calculateAndDisplayRoute(directionService, directionDisplay);
+            		}
+            	}
+
+
+            	function calculateAndDisplayRoute(directionsService, directionDisplay) {
+                    	directionsService.route({
+                      		origin: document.getElementById('startAddress').value,
+                      		destination: document.getElementById('endAddress').value,
+                      		travelMode: 'DRIVING'
+                    	}, function(response, status) {
+                     		 if (status === 'OK') {
+                        			directionDisplay.setDirections(response);
+                      		} else {
+                        			window.alert('Directions request failed due to ' + status);
+                      		}
+
+            		});
+
+                  	  }
+            	}
+            </script>
+
+</body>
+</html>
