@@ -9,7 +9,7 @@ module.exports = {
         user: "bb6bc7b13083e4",
         password: '6ab5298b',
         database: "heroku_1588b8642669eca",
-        connectionLimit: 20,
+        connectionLimit: 5,
     },
 
     secret: 'SwiftySecret', //For Token encryption

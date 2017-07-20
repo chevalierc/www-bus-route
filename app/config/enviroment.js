@@ -14,6 +14,12 @@ module.exports = function( app ) {
     } ) );
     app.use( bodyParser.json() );
 
+    //set view engine
+    //app.set('views', __dirname + '/views');
+    app.set('view engine', 'ejs');
+
+    app.use( express.static( __dirname + '/../../static' ) );
+
     // configure our app to handle CORS requests
     app.use( function( req, res, next ) {
         res.setHeader( 'Access-Control-Allow-Origin', '*' );
@@ -21,10 +27,6 @@ module.exports = function( app ) {
         res.setHeader( 'Access-Control-Allow-Headers', 'X-Requested-With,content-type, Authorization' );
         next();
     } );
-
-    // set static files location
-    app.use( express.static( __dirname + '/../../public' ) );
-    // app.use( favicon( './public/assets/_img/favicon.ico' ) );
 
     // log all requests to the console
     app.use( morgan( 'dev' ) );

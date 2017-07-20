@@ -13,6 +13,15 @@ module.exports = function (app, express) {
         app.use('/api', curRoute);
     }
 
+    app.get('/', function(req, res) {
+        res.render('pages/index');
+    });
+
+    app.get('*', function(req, res) {
+        var pageToGet = req.originalUrl.split('.')[0]
+        res.render('pages' + pageToGet);
+    });
+
     var curRoute = require('../routes/route.auth')(app, express);
     app.use('/api', curRoute);
 
@@ -21,11 +30,5 @@ module.exports = function (app, express) {
         var curRoute = require(routeLocation)(app, express);
         app.use('/api', curRoute);
     }
-
-    // MAIN CATCHALL ROUTE ---------------
-    // has to be registered after API ROUTES
-    app.get('*', function(req, res) {
-    	res.sendFile(path.join(__dirname + '/../../public/app/index.html'));
-    });
 
 }
