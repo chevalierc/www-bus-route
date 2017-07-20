@@ -1,198 +1,114 @@
-<html>
+ <html >
+ <head>
+     <% include ../partials/head %>
 
-<head>
-    <% include ../partials/head %>
-</head>
-
-<body ng-app='routeDetail'>
-    <div class="container">
-        <% include ../partials/menu %>
-    </div>
-    <div class="container" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid">
-        <div class="row">
-            <div class="col-md-4">
-                <h3> Route Number: 5 </h3>
-            </div>
-            <div class="col-md-4">
-                <h3 style="text-align:left">Start Address - End Address  </h3>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <routes-schedule></routes-schedule>
-            </div>
-            <div class="col-md-4">
-                <div style="width:400px; height:200px;" id="Amap"></div>
-            </div>
-        </div>
-    </div>
-    <div class="container">
-        <route-comments> </route-comments>
-    </div>
-    <% include ../partials/footer %>
+ </head>
+ <body ng-app="routeList">
+ <!-- navigation bar -->
+ <div class="container">
+     <% include ../partials/menu %>
 
 
-
-    <script>
-        angular.
-        module('routeDetail', []);
-
-        angular.
-        module('routeDetail').
-        component('routesSchedule', {
-            template: `
-          <table class="table">
-            <thead>
-              <tr >
-                <th ng-repeat="stop in $ctrl.stops">{{stop}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="time in $ctrl.times">
-
-                <td ng-repeat="Atime in time">{{Atime}}</td>
-
-              </tr>
-              <tr>
-
-              </tr>
+ <!--Content-->
+ <div>
 
 
-            </tbody>
-          </table>`,
-            controller: ['$scope', function($scope) {
-                this.stops = [
-                    "Ruggles", "State St.", "Newbury St.", "Back Bay"
-                ];
-                this.times = [
-                    ["9:00", "9:15", "9:20", "9:25"],
-                    ["10:00", "10:15", "10:20", "10:25"],
-                    ["11:00", "11:15", "11:20", "11:25"],
-                    ["12:00", "12:15", "12:20", "12:25"],
-                ];
+     <routes-list></routes-list>
 
-            }]
-        })
+ </div>
 
-        angular.
-        module('routeDetail').component('routeComments', {
-            template: `
-          <div class="commentbox" ng-repeat="comment in $ctrl.comments" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
-            <div class="row">
-          <div class="col-md-1">
-          <div class="row" style="margin-bottom: 1px invisible">
-            <div class="col-md-1">
-              <span ng-click="$ctrl.upVote(comment)" ng-style="comment.upColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+ </div>
 
-            </div>
-          </div>
-          <div class="row" style="margin-top: 5px">
-            <div class="col-md-1">
-              <span ng-click="$ctrl.downVote(comment)" ng-style="comment.downColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+ <!-- Sticky footer -->
+<% include ../partials/footer %>
+ <script>
+ angular.
+ module('routeList', []);
 
-            </div>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <p> {{comment.text}}</p>
-        </div>
-        </div>
-      </div> `,
-            controller: ['$scope', function($scope) {
-                this.upVote = function(route) {
-                    if (route.upColor['color'] == 'red') {
-                        route.upColor = {
-                            'color': 'black'
-                        };
-
-                    } else {
-                        route.upColor = {
-                            'color': 'red'
-                        };
-
-                    }
-                }
-                this.downVote = function(route) {
-                    if (route.downColor['color'] == 'red') {
-                        route.downColor = {
-                            'color': 'black'
-                        };
-
-                    } else {
-                        route.downColor = {
-                            'color': 'red'
-                        };
-
-                    }
-                }
-
-                this.comments = [{
-                        text: "terrible route",
-                        upColor: {},
-                        downColor: {}
-                    },
-                    {
-                        text: 'The bus was late this morning.',
-                        upColor: {},
-                        downColor: {}
-                    },
-                    {
-                        text: "This would be a great change",
-                        upColor: {},
-                        downColor: {}
-                    }
-                ]
+ angular.
+ module('routeList').
+ component('routesList', {
+   template: `
+   <table class="table table-hover">
+     <thead>
+       <tr>
+         <th>Proposed Changes</th>
 
 
+       </tr>
+     </thead>
+     <tbody>
+   <tr ng-repeat="route in $ctrl.routes">
+   <td>
 
-            }]
+       <div class="row">
+         <div class="col-md-1">
+          <span ng-style="route.color" ng-click="$ctrl.upVote(route)" style="display: table; margin: auto; font-size: 45px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
 
-        });
-    </script>
+          <h2> {{route.upVotes}} </h2>
+ </div>
+         <div class="col-md-6">
+           <div class="row" >
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap">
-    </script>
+             <h2 style="margin-top:0px">{{route.title}}</h2>
 
-    <script>
-        function initMap() {
-            var directionService = new google.maps.DirectionsService;
-            var directionDisplay = new google.maps.DirectionsRenderer;
+           </div>
+           <div class="row">
+             <p>{{route.snippet}}</p>
+           </div>
+           <div class="row">
+             <a href="proposed_routes"> {{route.comments}} Comments</a>
+           </div>
+         </div>
+       </div>
 
-            var map = new google.maps.Map(document.getElementById('Amap'), {
-                zoom: 7,
-                center: {
-                    lat: 41.85,
-                    lng: -87.65
-                }
-            });
+   </td>
+   </tr>
+   </tbody>
+ </tables>`,
+   controller:['$scope', function RouteListController($scope) {
+     this.routes = [
+       {
+         id:"1",
+         title: 'Bus to Cambridge',
+         snippet: 'this bus will go to Cambridge.',
+         comments: 1,
+         upVotes : 140,
+         color: {}
+       }, {
+         id:"2",
+         title: 'Bus from fort point to Sommerville',
+         snippet: 'This bus will go from Fort Point ot Sommerville through down town boston',
+         comments: 2,
+         upVotes : 34,
+         color: {}
+       }, {
+         id:"2",
+         title: 'Bus to go through quincy to Braintree',
+         snippet: 'this bus will go to Braintree through Quincy.',
+         comments: 3,
+         upVotes : 12,
+         color: {}
+       }
+     ];
 
-            directionDisplay.setMap(map);
-            var onChangeHandler = function() {
-                if (false) {
+   this.upVote = function(route){
+     if(route.color['color'] =='red'){
+       route.color = {'color': 'black'};
+       route.upVotes = route.upVotes - 1;
+     }else{
+       route.color={'color': 'red'};
+       route.upVotes = route.upVotes  + 1;
+     }
+   }
 
-                    calculateAndDisplayRoute(directionService, directionDisplay);
-                }
-            }
+   } ]
+ });
+
+ </script>
+
+ <script>startApp();</script>
 
 
-            function calculateAndDisplayRoute(directionsService, directionDisplay) {
-                directionsService.route({
-                    origin: document.getElementById('startAddress').value,
-                    destination: document.getElementById('endAddress').value,
-                    travelMode: 'DRIVING'
-                }, function(response, status) {
-                    if (status === 'OK') {
-                        directionDisplay.setDirections(response);
-                    } else {
-                        window.alert('Directions request failed due to ' + status);
-                    }
-
-                });
-
-            }
-        }
-    </script>
-
-</body>
-
-</html>
+ </body>
+ </html>
