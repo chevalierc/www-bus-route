@@ -17,11 +17,6 @@ module.exports = function (app, express) {
         res.render('pages/index');
     });
 
-    app.get('*', function(req, res) {
-        var pageToGet = req.originalUrl.split('.')[0]
-        res.render('pages' + pageToGet);
-    });
-
     var curRoute = require('../routes/route.auth')(app, express);
     app.use('/api', curRoute);
 
@@ -30,5 +25,10 @@ module.exports = function (app, express) {
         var curRoute = require(routeLocation)(app, express);
         app.use('/api', curRoute);
     }
+
+    app.get('*', function(req, res) {
+        var pageToGet = req.originalUrl.split('.')[0]
+        res.render('pages' + pageToGet);
+    });
 
 }

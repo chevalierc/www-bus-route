@@ -34,9 +34,17 @@ function submit(){
 
     //submit
     $.get(getGeocodeURL(data.startAddress), function(res){
+        if(res.status != "OK"){
+            $("#error").text("Start Address Error. Please make sure the address is complete.")
+            return
+        }
         data.startLocationLong = res.results[0].geometry.location.lng
         data.startLocationLat = res.results[0].geometry.location.lat
         $.get(getGeocodeURL(data.endAddress), function(res){
+            if(res.status != "OK"){
+                $("#error").text("Start Address Error. Please make sure the address is complete.")
+                return
+            }
             data.endLocationLong = res.results[0].geometry.location.lng
             data.endLocationLat = res.results[0].geometry.location.lat
             $.post( "/api/commute", data, function( result ) {

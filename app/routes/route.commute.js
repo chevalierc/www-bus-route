@@ -24,6 +24,35 @@ module.exports = function( app, express ) {
             } );
         } )
 
+    apiRouter.route( '/commutes' )
+        //get commutes for user
+        .get( function( req, res ) {
+            if(!req.decoded || !req.decoded.id){
+                return res.json( {
+                    success: false,
+                    error: "Not logged on"
+                } )
+            }
+            sqlHelper.find( {
+                table: "commute",
+                find_object:{
+                    userId: req.decoded.id
+                }
+            }, function( err, rows, cols ) {
+                if ( err ) {
+                    return res.json( {
+                        success: false,
+                        error: err
+                    } )
+                } else {
+                    return res.json( {
+                        success: true,
+                        commutes: rows
+                    } );
+                }
+            } );
+        } )
+
     apiRouter.route( '/commute/:id' )
         //get commutes
         .get( function( req, res ) {
