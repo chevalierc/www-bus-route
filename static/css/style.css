@@ -22,6 +22,12 @@ body {
 
 }
 
+.error{
+    padding-top: 10px;
+    color: red;
+    font-weight: bold;
+}
+
 #banner{
     background-image: url("../img/inbus.jpg");
     background-size: cover;

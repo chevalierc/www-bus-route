@@ -3,6 +3,27 @@ var sqlHelper = require( '../helpers/sqlHelper' )
 module.exports = function( app, express ) {
     var apiRouter = express.Router();
 
+    apiRouter.route( '/commute' )
+        //create commute
+        .post( function( req, res ) {
+            req.body.userId = req.decoded.id
+            sqlHelper.create( {
+                table: "commute",
+                object: req.body
+            }, function( err, rows, cols ) {
+                if ( err ) {
+                    return res.json( {
+                        success: false,
+                        error: err
+                    } )
+                } else {
+                    return res.json( {
+                        success: true
+                    } );
+                }
+            } );
+        } )
+
     apiRouter.route( '/commute/:id' )
         //get commutes
         .get( function( req, res ) {
@@ -19,25 +40,6 @@ module.exports = function( app, express ) {
                     } )
                 } else {
                     return res.json( rows )
-                }
-            } );
-        } )
-
-        //create commute
-        .put( function( req, res ) {
-            sqlHelper.create( {
-                table: "commute",
-                object: req.body
-            }, function( err, rows, cols ) {
-                if ( err ) {
-                    return res.json( {
-                        success: false,
-                        error: err
-                    } )
-                } else {
-                    return res.json( {
-                        success: true
-                    } );
                 }
             } );
         } )
@@ -61,5 +63,5 @@ module.exports = function( app, express ) {
             } );
         } )
 
-        return apiRouter;
+    return apiRouter;
 };

@@ -1,0 +1,82 @@
+<html>
+
+<head>
+    <% include ../partials/head %>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap"></script>
+        <script src="js/create_commute.js"></script>
+</head>
+
+<body>
+    <!-- navigation bar -->
+    <div class="container">
+        <% include ../partials/menu %>
+    </div>
+
+    <!-- Create Commute Form -->
+
+    <div class="container">
+        <form>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label for="startAddress">Start Address</label>
+                    <input type="text" class="form-control" id="startAddress" placeholder="Start Address">
+                </div>
+                <div class="form-group">
+                    <label for="endAddress">End Address</label>
+                    <input type="text" class="form-control" id="endAddress" placeholder="End Address">
+                </div>
+                <div style="width:400px; height:200px;" id="Amap"></div>
+            </div>
+
+            <div class="col-md-6">
+                <div class="form-group row">
+                    <label class="form-check-label"><input type="radio" name="time_type" value="1" checked="checked">Arrive By:</label>
+                    <label class="form-check-label"><input type="radio" name="time_type" value="0">Leave At:</label>
+                </div>
+                <div class="form-group row">
+                    <input class="form-control" type="time" value="08:00:00" id="time">
+                </div>
+                <!-- Days checkboxs start -->
+                <div class="form-group row">
+                    <label> Days of the Week </label>
+                    <div class="form-check form-check-inline">
+                    <label class="form-check-label">
+                        SUN: <input class="form-check-input" type="checkbox" id="sunday_checkbox" value="sunday">,
+                    </label>
+                    <label class="form-check-label">
+                        MON: <input class="form-check-input" type="checkbox" id="monday_checkbox" value="monday">,
+                    </label>
+                    <label class="form-check-label">
+                        TUE: <input class="form-check-input" type="checkbox" id="tuesday_checkbox" value="tuesday">,
+                    </label>
+                    <label class="form-check-label">
+                        WED: <input class="form-check-input" type="checkbox" id="wednesday_checkbox" value="wednesday">,
+                    </label>
+                    <label class="form-check-label">
+                        THU: <input class="form-check-input" type="checkbox" id="thursday_checkbox" value="thursday">,
+                    </label>
+                    <label class="form-check-label">
+                        FRI: <input class="form-check-input" type="checkbox" id="friday_checkbox" value="friday">,
+                    </label>
+                    <label class="form-check-label">
+                        SAT: <input class="form-check-input" type="checkbox" id="saturday_checkbox" value="saturday">,
+                    </label>
+                    </div>
+                </div>
+                <!-- Days checkboxs end -->
+            </div>
+
+            <button id="submit" type="button" class="btn btn-primary">Submit</button>
+            <div id="error" class="error"></div>
+
+        </form>
+    </div>
+
+    <% include ../partials/footer %>
+
+        <script>
+        </script>
+
+</body>
+
+</html>

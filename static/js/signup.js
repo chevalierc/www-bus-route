@@ -1,7 +1,7 @@
 $( document ).ready( function() {
     $( "#register-btn" ).click( function( e ) {
         e.preventDefault()
-        
+
         var email = $( "#signup-email" ).val()
         var password = $( "#signup-password" ).val()
         var confirm = $( "#signup-confirm" ).val()
@@ -22,7 +22,7 @@ $( document ).ready( function() {
                     $("#signup-error").text(result.message)
                 }else{
                     document.cookie='access_token=' + result.token //store access token in cookies
-                    document.location.href = window.location.origin + "/cr_commute.html"
+                    document.location.href = window.location.origin + "/create_commute.html"
                 }
             }
         );
