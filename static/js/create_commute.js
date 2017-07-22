@@ -23,14 +23,16 @@ function submit(){
     }
 
     data.timeType = $('input[name=time_type]:checked').val();
-    data.sun = $("#sunday_checkbox").prop('checked')
-    data.mon = $("#monday_checkbox").prop('checked')
-    data.tue = $("#tuesday_checkbox").prop('checked')
-    data.wed = $("#wednesday_checkbox").prop('checked')
-    data.thu = $("#thursday_checkbox").prop('checked')
-    data.fri = $("#friday_checkbox").prop('checked')
-    data.sat = $("#saturday_checkbox").prop('checked')
-    data.time = $("#time").val()
+    data.sun = $("#sunday_checkbox").prop('checked')? 1: 0
+    data.mon = $("#monday_checkbox").prop('checked')? 1: 0
+    data.tue = $("#tuesday_checkbox").prop('checked')? 1: 0
+    data.wed = $("#wednesday_checkbox").prop('checked')? 1: 0
+    data.thu = $("#thursday_checkbox").prop('checked')? 1: 0
+    data.fri = $("#friday_checkbox").prop('checked')? 1: 0
+    data.sat = $("#saturday_checkbox").prop('checked')? 1: 0
+    data.time =$("#time").val()
+
+    console.log(data)
 
     //submit
     $.get(getGeocodeURL(data.startAddress), function(res){
@@ -47,11 +49,12 @@ function submit(){
             }
             data.endLocationLong = res.results[0].geometry.location.lng
             data.endLocationLat = res.results[0].geometry.location.lat
+            console.log(data)
             $.post( "/api/commute", data, function( result ) {
                     if(!result.success){
                         $("#error").text(result.message)
                     }else{
-                        document.location.href = window.location.origin + "/commutes.html"
+                        //document.location.href = window.location.origin + "/commutes.html"
                     }
                 }
             );
