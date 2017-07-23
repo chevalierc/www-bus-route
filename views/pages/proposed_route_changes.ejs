@@ -1,7 +1,7 @@
  <html >
  <head>
      <% include ../partials/head %>
-
+     <script src="js/proposed_route_changes_angular.js"></script>
  </head>
  <body ng-app="routeList">
  <!-- navigation bar -->
@@ -21,93 +21,7 @@
 
  <!-- Sticky footer -->
 <% include ../partials/footer %>
- <script>
- angular.
- module('routeList', []);
 
- angular.
- module('routeList').
- component('routesList', {
-   template: `
-   <table class="table table-hover">
-     <thead>
-       <tr>
-         <th>Proposed Changes</th>
-
-
-       </tr>
-     </thead>
-     <tbody>
-   <tr ng-repeat="route in $ctrl.routes">
-   <td>
-
-       <div class="row">
-         <div class="col-md-1">
-          <span ng-style="route.color" ng-click="$ctrl.upVote(route)" style="display: table; margin: auto; font-size: 45px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
-
-          <h2 align="center"> {{route.upVotes}} </h2>
- </div>
-         <div class="col-md-6">
-           <div class="row" >
-
-             <h2 style="margin-top:0px">{{route.title}}</h2>
-
-           </div>
-           <div class="row">
-             <p>{{route.snippet}}</p>
-           </div>
-           <div class="row">
-             <a href="proposed_routes"> {{route.comments}} Comments</a>
-           </div>
-         </div>
-       </div>
-
-   </td>
-   </tr>
-   </tbody>
- </tables>`,
-   controller:['$scope', function RouteListController($scope) {
-     this.routes = [
-       {
-         id:"1",
-         title: 'Bus to Cambridge',
-         snippet: 'this bus will go to Cambridge.',
-         comments: 1,
-         upVotes : 140,
-         color: {}
-       }, {
-         id:"2",
-         title: 'Bus from fort point to Sommerville',
-         snippet: 'This bus will go from Fort Point ot Sommerville through down town boston',
-         comments: 2,
-         upVotes : 34,
-         color: {}
-       }, {
-         id:"2",
-         title: 'Bus to go through quincy to Braintree',
-         snippet: 'this bus will go to Braintree through Quincy.',
-         comments: 3,
-         upVotes : 12,
-         color: {}
-       }
-     ];
-
-   this.upVote = function(route){
-     if(route.color['color'] =='red'){
-       route.color = {'color': 'black'};
-       route.upVotes = route.upVotes - 1;
-     }else{
-       route.color={'color': 'red'};
-       route.upVotes = route.upVotes  + 1;
-     }
-   }
-
-   } ]
- });
-
- </script>
-
- <script>startApp();</script>
 
 
  </body>
