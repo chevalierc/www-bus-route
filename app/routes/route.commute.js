@@ -92,5 +92,24 @@ module.exports = function( app, express ) {
             } );
         } )
 
+        //delete commute
+        .delete( function( req, res ) {
+            sqlHelper.remove( {
+                table: "commute",
+                id: req.params.id
+            }, function( err, rows, cols ) {
+                if ( err ) {
+                    return res.json( {
+                        success: false,
+                        error: err
+                    } )
+                } else {
+                    return res.json( {
+                        success: true
+                    } );
+                }
+            } );
+        } )
+
     return apiRouter;
 };

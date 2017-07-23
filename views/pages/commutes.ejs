@@ -14,17 +14,22 @@
     <!-- Create Commute Form -->
 
     <div class="container" id="content">
-        <div id="error" class="error"></div>
+
         <div id="panel" class="panel panel-default">
-            <div class="panel-heading">
-                <h3 class="panel-title">
+            <div  class="panel-heading">
+                <h3 class="panel-title pull-left">
                     <span class="start"></span>
                     <i> To </i>
                     <span class="end"></span>
                 </h3>
+                <button class="btn btn-warning pull-right">X</button>
+                <div class="clearfix"></div>
             </div>
-            <div class="panel-body"></div>
+            <div class="panel-body">Panel content</div>
         </div>
+
+        <div id="error" class="error"></div>
+
     </div>
 
     <% include ../partials/footer %>
