@@ -54,7 +54,7 @@ function submit(){
                     if(!result.success){
                         $("#error").text(result.message)
                     }else{
-                        //document.location.href = window.location.origin + "/commutes.html"
+                        document.location.href = window.location.origin + "/commutes.html"
                     }
                 }
             );
@@ -72,24 +72,35 @@ function initMap() {
     var directionService = new google.maps.DirectionsService;
     var directionDisplay = new google.maps.DirectionsRenderer;
 
-    var map = new google.maps.Map(document.getElementById('Amap'), {
-        zoom: 7,
-        center: {
-            lat: 41.85,
-            lng: -87.65
-        }
-    });
+    var location = {
+        lat: 40.71,
+        lng: 74
+    }
 
+    var map = new google.maps.Map(document.getElementById('Amap'), {
+        zoom: 9,
+        center: location
+    });
     directionDisplay.setMap(map);
 
-    document.getElementById('startAddress').addEventListener('blur', onChangeHandler);
-    document.getElementById('endAddress').addEventListener('blur', onChangeHandler);
 
-    var onChangeHandler = function() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(userLocation){
+            location.lat = userLocation.coords.latitude
+            location.lng = userLocation.coords.longitude
+            map.setCenter(location);
+        });
+    }
+
+    $('#startAddress').on("click", onChangeHandler)
+    $('#endAddress').on("blur", onChangeHandler)
+
+    function onChangeHandler() {
         if (document.getElementById('startAddress').value !== '' && document.getElementById('endAddress').value !== '') {
             calculateAndDisplayRoute(directionService, directionDisplay);
         }
     }
+
 }
 
 function calculateAndDisplayRoute(directionsService, directionDisplay) {
