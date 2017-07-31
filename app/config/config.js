@@ -16,6 +16,7 @@ module.exports = {
 
     publicRoutes: [
         'routes/route.createUser',
+        'routes/route.visual',
     ],
 
     privateRoutes: [

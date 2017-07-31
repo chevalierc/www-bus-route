@@ -2,6 +2,9 @@
 
 <head>
     <% include ../partials/head %>
+    <script src="js/visual.js"></script>
+    <script src="js/fix_map_height.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&libraries=visualization&callback=initMap"></script>
 </head>
 
 <body>
@@ -10,19 +13,24 @@
     <div class="container">
         <div id="banner" class="jumbotron">
             <div class="row text-center white-black-shadow">
-                <h1>Neighborly Bus Routes </h1><br>
+                <h1>Neighborly Bus Routes</h1><br>
             </div>
         </div>
 
-        <div class="cointainer text-justify">
-            <h2>We hope to provide a more direct communication between public transportation authorities and their loyal
-            passengers. We believe it is important for public organizations to have feedback from the people that they
-            serve and that areas that are underserved by public transportation, should certainly have more of a
-            voice. </h2>
+        <div class="row">
+            <div class="col-md-6 cointainer">
+                <div style="width:100%; height:300;" id="map"></div>
+            </div>
+            <div id="intro" class="col-md-6">
+                <h3>We hope to provide a more direct communication between public transportation authorities and their loyal
+                passengers. We believe it is important for public organizations to have feedback from the people that they
+                serve and that areas that are underserved by public transportation, should certainly have more of a
+                voice. </h3>
+            </div>
         </div>
 
 
-        <div class="cointainer">
+        <div class="row">
             <!-- login -->
             <div class="col-md-6">
                 <form class="form-horizontal well" method="post" action="#">
