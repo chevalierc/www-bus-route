@@ -35,7 +35,7 @@ module.exports = function( app, express ) {
             }
             sqlHelper.find( {
                 table: "commute",
-                find_object:{
+                find:{
                     userId: req.decoded.id
                 }
             }, function( err, rows, cols ) {

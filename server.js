@@ -21,6 +21,15 @@ sqlHelper.connect( config.database, function(){
     //set up routes
     routes( app, express );
 
+    sqlHelper.find({
+        table: "commute",
+        find: {
+            id: 100
+        }
+    }, function(){
+
+    })
+
     //should show previously hidden errors
     process.on( 'unhandledRejection', console.log )
 
