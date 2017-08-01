@@ -1,107 +1,31 @@
 angular.
         module('routeDetail', []);
 
-        angular.
-        module('routeDetail').
-        component('routesSchedule', {
-          template: `
-          <table class="table">
-            <thead>
-              <tr >
-                <th ng-repeat="stop in $ctrl.stops">{{stop}}</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="time in $ctrl.times">
-
-                <td ng-repeat="Atime in time">{{Atime}}</td>
-
-              </tr>
-              <tr>
-
-              </tr>
-
-
-            </tbody>
-          </table>`,
-          controller: ['$scope', function($scope){
-            this.stops = [
-              "Ruggles", "State St.","Newbury St.", "Back Bay"
-            ];
-            this.times = [
-              ["9:00","9:15","9:20","9:25"],
-              ["10:00","10:15","10:20","10:25"],
-              ["11:00","11:15","11:20","11:25"],
-              ["12:00","12:15","12:20","12:25"],
-            ];
-
-          }]
-        })
+        
 
         angular.
         module('routeDetail').component('routeComments', {
-          templateUrl: 'proposed_routes.html',
-          controller: ['$scope', function($scope){
-            this.upVote = function(route){
-              if(route.upColor['color'] =='red'){
-                route.upColor = {'color': 'black'};
+          templateUrl: 'proposed_routes.html'}).
+          controller('ProposedRouteController',['$scope',  function($scope){
+	    var route_number = location.href.split("=")[1];
 
-              }else{
-                route.upColor={'color': 'red'};
-                if(route.downColor['color'] =='red'){
-                  route.downColor = {'color': 'black'};
-                }
-              }
-            }
-            this.downVote = function(route){
-              if(route.downColor['color'] =='red'){
-                route.downColor = {'color': 'black'};
+	    var ctrl = this
+	    ctrl.stops = {}; 
+	    ctrl.times = {}
+	    
+	    ctrl.route_data = {};
 
-              }else{
-                route.downColor={'color': 'red'};
-                if(route.upColor['color'] =='red'){
-                  route.upColor = {'color': 'black'};
-                }
+	    var storageObject = []
 
-              }
-            }
-            this.startAddress = '555 Huntington Ave. Boston, MA';
-            this.endAddress = '525 Hungton Ave. Boston, MA';
-            this.routeNumber = 56;
-            this.comment = "";
-
-            storageObject = [this.startAddress, this.endAddress]
-
-            this.comments =[
-              {
-                text: "terrible route",
-                upColor: {},
-                downColor :{}
-              },
-              {
-                text: 'The bus was late this morning.',
-                upColor:{},
-                downColor :{}
-              },
-              {
-                text: "This would be a great change",
-                upColor: {},
-                downColor :{}
-              }
-            ];
-
-            this.submitComment = function() {
-              this.comments.push({text: this.comment,
-                upColor: {},
-                downColor :{}});
-
-
-              this.comment="";
-            }
-
-
-
-            function initMap(){
+	    $.get('api/route/' + route_number, function(data, status) {
+			
+			$scope.$apply(ctrl.route_data = data[0]);
+			console.log(ctrl.route_data.times); 
+			
+			$scope.$apply(ctrl.stops = data[0].stops.split(","));
+			$scope.$apply(ctrl.times = JSON.parse(data[0].times.toString()));
+			storageObject = [ctrl.route_data.endAddress, ctrl.route_data.startAddress]
+			function initMap(){
               var directionService = new google.maps.DirectionsService;
               var directionDisplay = new google.maps.DirectionsRenderer;
 
@@ -143,9 +67,85 @@ angular.
 
 
 
-            initMap();
+           initMap();
+			 
+		}
+	    );
+
+	    
+		
+	    
+            this.upVote = function(route){
+	     try{
+              if(route.upColor['color'] =='red'){
+                route.upColor = {'color': 'black'};
+
+              }else{
+                route.upColor={'color': 'red'};
+                if(route.downColor['color'] =='red'){
+                  route.downColor = {'color': 'black'};
+                }
+              }
+		}
+		catch(e) {
+			route.upColor={'color': 'red'};
+			route.downColor = {'color': 'black'};
+		}
+            }
+            this.downVote = function(route){
+	     try{
+              if(route.downColor['color'] =='red'){
+                route.downColor = {'color': 'black'};
+
+              }else{
+                route.downColor={'color': 'red'};
+                if(route.upColor['color'] =='red'){
+                  route.upColor = {'color': 'black'};
+                }
+
+              }
+            
+		}catch(e) {
+			route.downColor={'color': 'red'};
+			route.upColor = {'color': 'black'};
+		
+		}
+	    }
+            
+            this.comment = "";
+            ctrl.comments = [];
+
+	    $.get('api/comment/' + route_number, function(data, status) {
+		
+		console.log(data);
+		$scope.$apply(ctrl.comments = data);
+		}); 
+
+            
+
+            
+            this.submitComment = function(comment) {
+	      var new_comment = {commuteId: route_number, 
+		upVotes : 0, downVotes: 0, text: this.comment };
+              
+                
+	      
+              $.post( "/api/comment/" +route_number, new_comment, function( result ) {
+                    if(!result.success){
+                        alert("unable to post comment");
+                    }else{
+                        $scope.$apply(ctrl.comments.push(new_comment));
+                    }
+                });
+
+              this.comment="";
+            }
+
+
+
+            
 
           }]
 
 
-        });
+        );

@@ -1,23 +1,27 @@
- <html >
+ <html ng-app='routeList'>
  <head>
-     <% include ../partials/head %>
-     <script src="js/proposed_route_changes_angular.js"></script>
+	
+        <% include ../partials/head %>
+	<script src="js/proposed_route_changes_angular.js"></script>
+     
  </head>
- <body ng-app="routeList">
+ <body >
  <!-- navigation bar -->
  <div class="container">
      <% include ../partials/menu %>
 
 
  <!--Content-->
- <div>
+<div>
 
 
      <routes-list></routes-list>
 
- </div>
+
 
  </div>
+</div>
+
 
  <!-- Sticky footer -->
 <% include ../partials/footer %>
