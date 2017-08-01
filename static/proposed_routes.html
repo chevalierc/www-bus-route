@@ -1,16 +1,34 @@
-
+<div ng-controller="ProposedRouteController as ctrl">
           <div class="container" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid">
           <div class="row">
             <div class="col-md-6">
-              <h3> Route Number: {{$ctrl.routeNumber}} </h3>
+              <h3> Route Number: {{ctrl.route_data.id}} </h3>
             </div>
             <div class="col-md-6" >
-              <h3 style="text-align:left">{{$ctrl.startAddress}} - {{$ctrl.endAddress}}  </h3>
+              <h3 style="text-align:left">{{ctrl.route_data.startAddress}} - {{ctrl.route_data.endAddress}}  </h3>
             </div>
           </div>
           <div class="row">
             <div class="col-md-6">
-              <routes-schedule></routes-schedule>
+              <table class="table">
+            <thead>
+              <tr >
+                <th ng-repeat="stop in ctrl.stops">{{stop}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr ng-repeat="time in ctrl.times">
+
+                <td ng-repeat="Atime in time">{{Atime}}</td>
+
+              </tr>
+              <tr>
+
+              </tr>
+
+
+            </tbody>
+          </table>
             </div>
             <div class="col-md-6">
               <div style="width:400px; height:200px;" id="Amap"></div>
@@ -19,27 +37,27 @@
         </div>
           <div class="row" style="padding-bottom : 10px; padding-top : 10px">
           <div class="col-md-4 col-md-offset-1">
-            <textarea  style="resize:none" rows="5" cols="120" ng-model=$ctrl.comment></textarea>
+            <textarea  style="resize:none" rows="5" cols="120" ng-model="ctrl.comment"></textarea>
             </div>
           </div>
 
           <div class="row">
             <div class="col-md-4 col-md-offset-10">
-              <input type="submit" value="Submit Comment" ng-click="$ctrl.submitComment()" class="btn btn-primary">
+              <input type="submit" value="Submit Comment" ng-click="ctrl.submitComment()" class="btn btn-primary">
             </div>
           </div>
-          <div class="commentbox" ng-repeat="comment in $ctrl.comments" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
+          <div class="commentbox" ng-repeat="comment in ctrl.comments" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
             <div class="row">
           <div class="col-md-1">
           <div class="row" style="margin-bottom: 1px invisible">
             <div class="col-md-1">
-              <span ng-click="$ctrl.upVote(comment)" ng-style="comment.upColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+              <span ng-click="ctrl.upVote(comment)" ng-style="comment.upColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
 
             </div>
           </div>
           <div class="row" style="margin-top: 5px">
             <div class="col-md-1">
-              <span ng-click="$ctrl.downVote(comment)" ng-style="comment.downColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
+              <span ng-click="ctrl.downVote(comment)" ng-style="comment.downColor" style="display: table; margin: auto; font-size: 20px"class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>
 
             </div>
           </div>
@@ -48,4 +66,5 @@
           <p> {{comment.text}}</p>
         </div>
         </div>
-      </div> 
+      </div>
+</div>
