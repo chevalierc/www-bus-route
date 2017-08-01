@@ -11,7 +11,7 @@ angular.
   	ctrl.routes = [{color:""},{color:""},{color:""}]; 
    
 	$.get('api/route', function(data, status){
-		console.log(data.commutes);
+		console.log(data);
                
 		$scope.$apply(ctrl.routes = data.commutes);
 		

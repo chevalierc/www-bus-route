@@ -17,12 +17,13 @@ module.exports = {
     publicRoutes: [
         'routes/route.createUser',
         'routes/route.visual',
+	
     ],
 
     privateRoutes: [
         'routes/route.user',
-        'routes/route.commute',
-        'routes/route.route'
+        'routes/route.commute', 
+	'routes/route.route'
     ]
 
 };
