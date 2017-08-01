@@ -28,11 +28,6 @@ body {
     font-weight: bold;
 }
 
-#banner{
-    background-image: url("../img/inbus.jpg");
-    background-size: cover;
-}
-
 .create-commute-submit{
     margin-top: 20px;
     font-size: 28px;
@@ -60,6 +55,25 @@ body {
 
 #customBtn:hover {
     cursor: pointer;
+}
+#login-section{
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 75px;
+    margin-top: 75px;
+}
+
+#signup-section{
+    margin: 0 auto;
+    width: 80%;
+    margin-bottom: 75px;
+    margin-top: 75px;
+}
+
+#banner{
+    background-image: url("../img/inbus.jpg");
+    background-size: cover;
+    margin-top: 25px;
 }
 
 span.label {

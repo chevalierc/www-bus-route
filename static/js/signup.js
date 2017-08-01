@@ -14,7 +14,7 @@ $( document ).ready( function() {
         console.log(password, confirm)
 
         if(password != confirm){
-            return $("#signup-error").text("Paswords dont match!")
+            return $("#signup-error").text("Passwords don't match!")
         }
 
         $.post( "/api/users", data, function( result ) {
@@ -22,7 +22,7 @@ $( document ).ready( function() {
                     $("#signup-error").text(result.message)
                 }else{
                     document.cookie='access_token=' + result.token //store access token in cookies
-                    document.location.href = window.location.origin + "/create_commute.html"
+                    document.location.href = window.location.origin + "/index.html"
                 }
             }
         );
