@@ -21,7 +21,8 @@ module.exports = {
 
     privateRoutes: [
         'routes/route.user',
-        'routes/route.commute'
+        'routes/route.commute',
+        'routes/route.route'
     ]
 
 };

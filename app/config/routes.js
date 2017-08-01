@@ -27,7 +27,8 @@ module.exports = function (app, express) {
     }
 
     app.get('*', function(req, res) {
-        var pageToGet = req.originalUrl.split('.')[0]
+        var pageToGet = req.originalUrl.split('?')[0]
+        pageToGet = pageToGet.split('.')[0]
         res.render('pages' + pageToGet);
     });
 
