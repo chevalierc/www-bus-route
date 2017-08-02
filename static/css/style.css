@@ -20,7 +20,10 @@ body {
 
 .footer p {
     padding-top: 20px;
+}
 
+.large{
+    font-size: 18px;
 }
 
 .error{
