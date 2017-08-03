@@ -2,6 +2,13 @@ $( document ).ready( function() {
     $( "#submit" ).click( function( e ) {
         submit();
     } )
+    $.ajax( {
+        url: '/api/me',
+        type: 'GET',
+        error: function(){
+            document.location.href = window.location.origin
+        }
+    } );
     setupDayOfWeekSelector()
 } )
 

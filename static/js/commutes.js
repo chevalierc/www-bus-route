@@ -1,12 +1,18 @@
 $( document ).ready( function() {
-    $.get( "/api/commutes", function( result ) {
-        if ( !result.success ) {
-            $( "#error" ).text( result.message )
-        } else {
-            displayResults( result.commutes )
+    $.ajax( {
+        url: '/api/commutes',
+        type: 'GET',
+        success: function( result ) {
+            if ( !result.success ) {
+                $( "#error" ).text( result.message )
+            } else {
+                displayResults( result.commutes )
+            }
+        },
+        error: function(){
+            document.location.href = window.location.origin
         }
     } );
-
 } )
 
 function displayResults( results ) {
@@ -21,13 +27,14 @@ function displayResults( results ) {
         new_panel.find( '.btn' ).click( function( e ) {
             var id = e.target.attributes[ "id" ].value
             $.ajax( {
-                url: '/api/commute/' +  id,
+                url: '/api/commute/' + id,
                 type: 'DELETE',
                 success: function( result ) {
-                    if(result.success){
+                    if ( result.success ) {
                         location.reload();
-                    }else{
+                    } else {
                         $( "#error" ).text( result.message )
+                        console.log( error )
                     }
                 }
             } );
