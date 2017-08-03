@@ -20,6 +20,7 @@ function displayResults( results ) {
     $( '#panel' ).remove()
     for ( i = 0; i < results.length; i++ ) {
         var new_panel = $panel.clone();
+        new_panel.css("display","block");//make visable
         new_panel.find( '.start' ).text( results[ i ].startAddress );
         new_panel.find( '.end' ).text( results[ i ].endAddress );
         new_panel.find( '.panel-body' ).text( createBody( results[ i ] ) );
