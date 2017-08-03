@@ -46,7 +46,7 @@
               <input type="submit" value="Submit Comment" ng-click="ctrl.submitComment()" class="btn btn-primary">
             </div>
           </div>
-          <div class="commentbox" ng-repeat="comment in ctrl.comments" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
+          <div class="commentbox" ng-repeat="comment in ctrl.comments | orderBy:ctrl.orderProp" style="border-bottom: 1px solid; border-right: 1px solid; border-left: 1px solid; border-top: 1px solid; height: 65px;">
             <div class="row">
           <div class="col-md-1">
           <div class="row" style="margin-bottom: 1px invisible">

@@ -107,5 +107,27 @@ apiRouter.route( '/comment/:id' )
             } );
 	} )
 
+apiRouter.route( '/votes' )
+        //get commutes
+        .post( function( req, res ) {
+	    
+            sqlHelper.update( {
+                table: "comments",
+                object: req.body
+            }, function( err, rows, cols ) {
+                if ( err ) {
+                    return res.json( {
+                        success: false,
+                        error: err
+                    } )
+                } else {
+                    return res.json( {
+                        success: true,
+                        data : rows
+                    } )
+                }
+            } );
+        } )
+
  return apiRouter;
 };
