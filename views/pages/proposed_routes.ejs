@@ -1,28 +1,25 @@
 <html>
+
 <head>
-  <% include ../partials/head %>
-    <script async defer
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback">
-    </script>
-    <script src="js/proposed_routes_angular.js"> </script>
+    <% include ../partials/head %>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback">
+        </script>
+        <script src="js/proposed_routes_angular.js">
+        </script>
 
 
 
 </head>
 
 <body ng-app='routeDetail'>
+
+    <div class="container">
+        <% include ../partials/menu %>
     </div>
-
-      <div class="container">
-
-          <% include ../partials/menu %>
-
-
-        <route-comments > </route-comments >
-    </div>
+    <route-comments> </route-comments>
 
     <% include ../partials/footer %>
 
-
 </body>
+
 </html>
