@@ -1,32 +1,20 @@
- <html ng-app='routeList'>
- <head>
-	
-        <% include ../partials/head %>
-	<script src="js/proposed_route_changes_angular.js"></script>
-     
- </head>
- <body >
- <!-- navigation bar -->
- <div class="container">
-     <% include ../partials/menu %>
+<head>
+    <% include ../partials/head %>
+    <script src="js/proposed_route_changes.js"></script>
+    <script src="js/redirect_if_not_logged_in.js"></script>
+</head>
 
+<body ng-app='routeList'>
+    <!-- navigation bar -->
+    <div class="container">
+        <% include ../partials/menu %>
+            <!--Content-->
+            <div>
+                <routes-list></routes-list>
+            </div>
+    </div>
 
- <!--Content-->
-<div>
+    <!-- Sticky footer -->
+    <% include ../partials/footer %>
 
-
-     <routes-list></routes-list>
-
-
-
- </div>
-</div>
-
-
- <!-- Sticky footer -->
-<% include ../partials/footer %>
-
-
-
- </body>
- </html>
+</body>

@@ -2,15 +2,36 @@ $( document ).ready( function() {
     $( "#submit" ).click( function( e ) {
         submit();
     } )
-    $.ajax( {
-        url: '/api/me',
-        type: 'GET',
-        error: function(){
-            document.location.href = window.location.origin
+    setupDayOfWeekSelector()
+    setUpLeaveArriveSelector()
+} )
+
+function setUpLeaveArriveSelector() {
+    $( ".leave-arrive" ).click( function( e ) {
+        if ( $( this ).attr( "class" ).includes( "leave-arrive-inactive" ) ) {
+            $( ".leave-arrive-active" ).each( function( index ) {
+                $( this ).addClass( "leave-arrive-inactive" );
+                $( this ).removeClass( "leave-arrive-active" );
+            })
+            $( this ).addClass( "leave-arrive-active" );
+            $( this ).removeClass( "leave-arrive-inactive" );
+        }
+    } )
+}
+
+function getValuesForLeaveArrive() {
+    var result = 0;
+    $( ".leave-arrive" ).each( function( index ) {
+        if ( $( this ).attr( "class" ).includes( "leave-arrive-active" ) ) {
+            if( $(this).attr("id") == "leave-by"){
+                result = 0
+            }else{
+                result = 1
+            }
         }
     } );
-    setupDayOfWeekSelector()
-} )
+    return result;
+}
 
 function setupDayOfWeekSelector() {
     $( ".dow" ).click( function( e ) {
@@ -21,7 +42,6 @@ function setupDayOfWeekSelector() {
             $( this ).addClass( "dow-active" );
             $( this ).removeClass( "dow-inactive" );
         }
-        getValuesForDayOfWeek()
     } )
 }
 
@@ -55,13 +75,13 @@ function submit() {
         return
     }
 
-    data.timeType = $( 'input[name=time_type]:checked' ).val();
-    $.extend(data, getValuesForDayOfWeek() )
+    data.timeType = getValuesForLeaveArrive()
+    $.extend(data, getValuesForDayOfWeek() ) //add values for DayOfWeek selector
     data.time = $( "#time" ).val()
 
     console.log( data )
 
-    //submit
+    //submit and get long lat of addresses while there
     $.get( getGeocodeURL( data.startAddress ), function( res ) {
         if ( res.status != "OK" ) {
             $( "#error" ).text( "Start Address Error. Please make sure the address is complete." )

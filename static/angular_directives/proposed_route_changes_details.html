@@ -52,7 +52,7 @@
 
     <div class="commentbox container panel panel-default" style="padding: 8px;" ng-repeat="comment in ctrl.comments | orderBy:ctrl.orderProp">
         <div class="row">
-            <div class="col-md-1">
+            <!-- <div class="col-md-1">
                 <div class="row" style="margin-bottom: 1px invisible">
                     <div class="col-md-1">
                         <span ng-click="ctrl.upVote(comment)" ng-style="comment.upColor" style="display: table; margin: auto; font-size: 20px" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
@@ -65,7 +65,7 @@
 
                     </div>
                 </div>
-            </div>
+            </div> -->
             <div class="col-md-11">
                 <p> {{comment.text}}</p>
             </div>

@@ -1,14 +1,9 @@
-<html>
-
 <head>
     <% include ../partials/head %>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback">
-        </script>
-        <script src="js/proposed_routes_angular.js">
-        </script>
-
-
-
+    <script src="js/logout.js"></script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback"></script>
+    <script src="js/proposed_route_changes_details.js"></script>
+    <script src="js/redirect_if_not_logged_in.js"></script>
 </head>
 
 <body ng-app='routeDetail'>
@@ -21,5 +16,3 @@
     <% include ../partials/footer %>
 
 </body>
-
-</html>

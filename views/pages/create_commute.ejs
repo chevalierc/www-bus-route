@@ -1,9 +1,8 @@
-<html>
-
 <head>
     <% include ../partials/head %>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAoOnmeOfTKrMCM9fwH15jBJ1jnMaR49YI&callback=initMap"></script>
         <script src="js/create_commute.js"></script>
+        <script src="js/redirect_if_not_logged_in.js"></script>
 </head>
 
 <body>
@@ -26,9 +25,11 @@
                 <div class="form-group">
                     <input type="text" class="form-control create-commute-text" id="endAddress" placeholder="End Address">
                 </div>
+                <div class="form-group create-commute-text">
+                    <span class="leave-arrive leave-arrive-inactive" id="leave-by">Leave By:</span>
+                    <span class="leave-arrive leave-arrive-active" id="arrive-by">Arrive At:</span>
+                </div>
                 <div class="form-group form-horizontal create-commute-text">
-                    <label class="form-check-label"><input type="radio" name="time_type" value="1" checked="checked">Arrive By:</label>
-                    <label class="form-check-label"><input type="radio" name="time_type" value="0">Leave At:</label>
                     <input class="form-control create-commute-text" type="time" value="08:00:00" id="time">
                 </div>
                 <!-- Days checkboxs start -->
@@ -58,5 +59,3 @@
     <% include ../partials/footer %>
 
 </body>
-
-</html>

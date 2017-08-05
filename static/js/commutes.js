@@ -25,6 +25,7 @@ function displayResults( results ) {
         new_panel.find( '.end' ).text( results[ i ].endAddress );
         new_panel.find( '.panel-body' ).text( createBody( results[ i ] ) );
         new_panel.find( '.btn' ).attr( "id", results[ i ].id );
+
         new_panel.find( '.btn' ).click( function( e ) {
             var id = e.target.attributes[ "id" ].value
             $.ajax( {
@@ -40,6 +41,7 @@ function displayResults( results ) {
                 }
             } );
         } )
+        
         $( '#content' ).append( new_panel );
     }
 }

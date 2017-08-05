@@ -15,7 +15,7 @@ $( document ).ready( function() {
                     $("#login-error").text(result.message)
                 }else{
                     document.cookie='access_token=' + result.token //store access token in cookies
-                    document.location.href = window.location.origin + "/create_commute.html"
+                    document.location.href = window.location.origin + "/create_commute"
                 }
             }
         );

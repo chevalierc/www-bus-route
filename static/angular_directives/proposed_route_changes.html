@@ -1,0 +1,34 @@
+<div ng-controller="RouteListController as ctrl">
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>Proposed Changes</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat="route in ctrl.routes">
+                <td>
+                    <div class="row">
+                        <div class="col-md-1">
+                            <span ng-style="route.color" ng-click="ctrl.upVote($index)" style="display: table; margin: auto; font-size: 45px" class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span>
+                            <h2 align="center"> {{route.upVotes}} </h2>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="row">
+                                <h2 style="margin-top:0px">{{route.title}}</h2>
+                            </div>
+                            <div class="row">
+                                <p>{{route.description}}</p>
+                            </div>
+                            <div class="row">
+                                <a href="/proposed_routes?route={{route.id}}">Comments</a>
+                            </div>
+
+                        </div>
+                    </div>
+
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>
