@@ -6,7 +6,7 @@ module( 'routeList' ).
 component( 'routesList', {
     templateUrl: 'angular_directives/proposed_route_changes.html'
 } ).
-controller( 'RouteListController', [ '$scope', '$http', '$rootScope', function( $scope, $http, $rootScope, ) {
+controller( 'RouteListController', [ '$scope', function( $scope ) {
     var ctrl = this;
 
     ctrl.routes = [ {
